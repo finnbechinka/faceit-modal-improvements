@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         remove-faceit-modal
+// @name         remove faceit modal
 // @namespace    https://www.faceit.com/
 // @version      0.1
 // @description  replace modal profile link with normal profile link
@@ -8,6 +8,7 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=faceit.com
 // @grant        none
 // @run-at       document-end
+// @homepageURL  https://github.com/shakerrrr/remove-faceit-modal
 // ==/UserScript==
 
 (function () {
