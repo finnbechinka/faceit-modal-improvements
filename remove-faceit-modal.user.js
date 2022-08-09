@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         remove faceit modal
 // @namespace    https://www.faceit.com/
-// @version      0.1
+// @version      0.2
 // @description  replace modal profile link with normal profile link
 // @author       shaker
 // @match        https://www.faceit.com/en/csgo/room/*
