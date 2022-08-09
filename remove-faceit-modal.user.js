@@ -11,16 +11,15 @@
 // @homepageURL  https://github.com/shakerrrr/remove-faceit-modal
 // ==/UserScript==
 
+// profile link class: sc-hFIzcO eaWQvj
+
 (function () {
     "use strict";
-    console.log("remove faceit modal");
-    // (current) profile link class: sc-hFIzcO eaWQvj
     window.setInterval(() => {
         let active = false;
         const elements = document.getElementsByClassName("sc-hFIzcO");
         if (elements.length > 0 && !active) {
             active = true;
-            console.log("element found");
             const link = elements.item(0).getAttribute("href");
             const new_link = link.replace("players-modal", "players");
             elements.item(0).setAttribute("href", new_link);
