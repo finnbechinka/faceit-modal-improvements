@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         remove faceit modal
+// @name         [dev] remove faceit modal
 // @namespace    https://www.faceit.com/
 // @version      0.2
 // @description  replace modal profile link with normal profile link
 // @author       shaker
-// @match        https://www.faceit.com/en/csgo/room/*
+// @match        *://www.faceit.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=faceit.com
 // @grant        none
 // @run-at       document-end
@@ -12,20 +12,21 @@
 // ==/UserScript==
 
 // profile link class: sc-hFIzcO eaWQvj
+// modal url: https://www.faceit.com/en/players-modal/[username]
 
 (function () {
     "use strict";
+    let elements;
+    let old_elements;
     window.setInterval(() => {
-        let active = false;
-        const elements = document.getElementsByClassName("sc-hFIzcO");
-        if (elements.length > 0 && !active) {
-            active = true;
-            const link = elements.item(0).getAttribute("href");
-            const new_link = link.replace("players-modal", "players");
-            elements.item(0).setAttribute("href", new_link);
-        }
-        if (elements.length == 0 && active) {
-            active = false;
+        elements = document.querySelectorAll("[href*='/players-modal/']");
+        if (elements !== old_elements) {
+            old_elements = elements;
+            elements.forEach((element) => {
+                const link = element.getAttribute("href");
+                const new_link = link.replace("players-modal", "players");
+                element.setAttribute("href", new_link);
+            });
         }
     }, 250);
 })();
