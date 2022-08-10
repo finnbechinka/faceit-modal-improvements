@@ -1,8 +1,11 @@
 # remove-faceit-modal
-
 small script that replaces the modal profile link with a normal profile link
 
-How to install:
+### Usage guide:
+- Click on a player card in a match room
+    - Middle-click on the profile link to open the normal (non-modal) profile in another tab
+    - Click on the profile link, to open the modal on top of the match room
+### How to install:
 1. Install Tampermonkey, Violentmonkey or FireMonkey (Firefox)
 2. Click the install link below
 3. Click "Install" or "Confirm installation" or "OK"
