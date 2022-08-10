@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         remove faceit modal
+// @name         [dev] remove faceit modal
 // @namespace    https://www.faceit.com/
 // @version      0.3
 // @description  replace modal profile link with normal profile link
