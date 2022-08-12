@@ -12,3 +12,5 @@ small script that replaces the modal profile link with a normal profile link
 4. You're done! 
 
 [Install script](https://github.com/shakerrrr/remove-faceit-modal/raw/master/remove-faceit-modal.user.js)
+
+#### Or install the [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/remove-faceit-modal/)
