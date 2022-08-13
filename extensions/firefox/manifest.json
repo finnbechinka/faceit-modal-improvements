@@ -8,6 +8,7 @@
 
     "content_scripts": [
         {
+            "run-at": "document-end",
             "matches": ["*://www.faceit.com/*"],
             "js": ["remove-faceit-modal.js"]
         }
