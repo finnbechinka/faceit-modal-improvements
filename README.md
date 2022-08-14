@@ -5,6 +5,7 @@ small script that replaces the modal profile link with a normal profile link
 - Click on a player card in a match room
     - Middle-click on the profile link to open the normal (non-modal) profile in another tab
     - Click on the profile link, to open the modal on top of the match room
+- On modal profiles click on the FACEIT icon under the share button to open the the non-modal profile in a new tab 
 ### How to install:
 #### <b>Install the [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/remove-faceit-modal/)</b>
 #### Or install the userscript by following the steps below
