@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         remove faceit modal
+// @name         [dev] remove faceit modal
 // @namespace    https://www.faceit.com/
 // @version      0.3
 // @description  replace modal profile link with normal profile link
@@ -19,14 +19,28 @@
     let elements;
     let old_elements;
     window.setInterval(() => {
-        elements = document.querySelectorAll("[href*='/players-modal/']");
-        if (elements !== old_elements) {
-            old_elements = elements;
-            elements.forEach((element) => {
-                const link = element.getAttribute("href");
-                const new_link = link.replace("players-modal", "players");
-                element.setAttribute("href", new_link);
+        if (window.location.href.includes("faceit.com/en/players-modal/")) {
+            const shadows = Array.from(document.querySelectorAll("*"))
+                .map((el) => el.shadowRoot)
+                .filter(Boolean);
+            shadows.forEach((s) => {
+                const res = s.querySelectorAll("div");
+                res.forEach((e) => {
+                    if (e.firstChild.data == "Member since") {
+                        console.log("WEOW");
+                    }
+                });
             });
+        } else {
+            elements = document.querySelectorAll("[href*='/players-modal/']");
+            if (elements !== old_elements) {
+                old_elements = elements;
+                elements.forEach((element) => {
+                    const link = element.getAttribute("href");
+                    const new_link = link.replace("players-modal", "players");
+                    element.setAttribute("href", new_link);
+                });
+            }
         }
     }, 250);
 })();
