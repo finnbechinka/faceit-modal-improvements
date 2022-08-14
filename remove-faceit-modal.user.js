@@ -21,8 +21,15 @@
     let elements;
     let old_elements;
     let open_profile;
+    let old_url;
     window.setInterval(() => {
-        if (window.location.href.includes("players-modal")) {
+        const current_url = window.location.href;
+        if (current_url != old_url) {
+            old_url = current_url;
+            open_profile.parentNode.removeChild(open_profile);
+            open_profile = null;
+        }
+        if (current_url.includes("players-modal")) {
             if (!open_profile) {
                 // find the shadow root(s) (very cringe)
                 const shadows = Array.from(document.querySelectorAll("*"))
@@ -41,8 +48,10 @@
                                 open_profile.appendChild(img);
                                 open_profile.title =
                                     "open this profile in a new tab";
-                                let url = window.location.href;
-                                url = url.replace("players-modal", "players");
+                                let url = current_url.replace(
+                                    "players-modal",
+                                    "players"
+                                );
                                 open_profile.href = url;
                                 open_profile.target = "_blank";
                                 open_profile.style.marginTop = "15px";
