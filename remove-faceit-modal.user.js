@@ -22,10 +22,12 @@
     let old_elements;
     let open_profile;
     let old_url;
+    let br;
     window.setInterval(() => {
         const current_url = window.location.href;
         if (current_url != old_url) {
             old_url = current_url;
+            open_profile.parentNode.removeChild(br);
             open_profile.parentNode.removeChild(open_profile);
             open_profile = null;
         }
@@ -41,6 +43,29 @@
                         old_elements = elements;
                         elements.forEach((e) => {
                             if (e.lastChild.data == "Share") {
+                                const div = e.parentNode.parentNode;
+
+                                open_profile = e.cloneNode(true);
+                                open_profile.removeChild(
+                                    open_profile.firstChild
+                                );
+                                open_profile.lastChild.data = "OPEN IN NEW TAB";
+                                let link = document.createElement("a");
+                                link.title = "open this profile in a new tab";
+                                let url = current_url.replace(
+                                    "players-modal",
+                                    "players"
+                                );
+                                link.href = url;
+                                link.target = "_blank";
+                                link.style.textDecoration = "none";
+                                link.appendChild(open_profile);
+                                br = document.createElement("br");
+                                div.lastChild.append(br.cloneNode(true));
+                                div.lastChild.append(br.cloneNode(true));
+                                div.lastChild.append(link);
+
+                                /*
                                 let img = document.createElement("img");
                                 img.src = faceit_icon;
                                 img.style.marginTop = "15px";
@@ -57,6 +82,7 @@
                                 open_profile.style.marginTop = "15px";
 
                                 e.parentNode.parentNode.append(open_profile);
+                                */
                             }
                         });
                     }
