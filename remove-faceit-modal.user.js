@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         remove faceit modal
 // @namespace    https://www.faceit.com/
-// @version      1.1
+// @version      1.1.1
 // @description  replace modal profile link with normal profile link
 // @author       shaker
 // @match        *://www.faceit.com/*
@@ -20,15 +20,16 @@
         "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://faceit.com&size=32";
     let elements;
     let old_elements;
-    let open_profile;
     let old_url;
+    let open_profile;
     let br;
     window.setInterval(() => {
         const current_url = window.location.href;
         if (current_url != old_url) {
             old_url = current_url;
-            open_profile.parentNode.removeChild(br);
-            open_profile.parentNode.removeChild(open_profile);
+            br.parentNode.removeChild(br.parentNode.lastChild);
+            br.parentNode.removeChild(br.parentNode.lastChild);
+            br.parentNode.removeChild(br);
             open_profile = null;
         }
         if (current_url.includes("players-modal")) {
@@ -61,7 +62,7 @@
                                 link.style.textDecoration = "none";
                                 link.appendChild(open_profile);
                                 br = document.createElement("br");
-                                div.lastChild.append(br.cloneNode(true));
+                                div.lastChild.append(br);
                                 div.lastChild.append(br.cloneNode(true));
                                 div.lastChild.append(link);
 
