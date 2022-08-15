@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         remove faceit modal
 // @namespace    https://www.faceit.com/
-// @version      1.1.1
+// @version      1.1.2
 // @description  replace modal profile link with normal profile link
 // @author       shaker
 // @match        *://www.faceit.com/*
