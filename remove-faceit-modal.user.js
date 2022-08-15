@@ -21,19 +21,27 @@
     let elements;
     let old_elements;
     let old_url;
-    let open_profile;
+    let open_profiles = [];
     let br;
     window.setInterval(() => {
         const current_url = window.location.href;
         if (current_url != old_url) {
             old_url = current_url;
-            br.parentNode.removeChild(br.parentNode.lastChild);
-            br.parentNode.removeChild(br.parentNode.lastChild);
-            br.parentNode.removeChild(br);
-            open_profile = null;
+            open_profiles.forEach((open_profile) => {
+                let div = open_profile.parentNode;
+                if (div) {
+                    div.removeChild(div.lastChild);
+                    div.removeChild(div.lastChild);
+                    div.removeChild(div.lastChild);
+                }
+            });
+            open_profiles = [];
         }
         if (current_url.includes("players-modal")) {
-            if (!open_profile) {
+            if (
+                (old_url.includes("/players/") && open_profiles.length < 2) ||
+                open_profiles.length < 1
+            ) {
                 // find the shadow root(s) (very cringe)
                 const shadows = Array.from(document.querySelectorAll("*"))
                     .map((el) => el.shadowRoot)
@@ -46,11 +54,9 @@
                             if (e.lastChild.data == "Share") {
                                 const div = e.parentNode.parentNode;
 
-                                open_profile = e.cloneNode(true);
-                                open_profile.removeChild(
-                                    open_profile.firstChild
-                                );
-                                open_profile.lastChild.data = "OPEN IN NEW TAB";
+                                let button = e.cloneNode(true);
+                                button.removeChild(button.firstChild);
+                                button.lastChild.data = "OPEN IN NEW TAB";
                                 let link = document.createElement("a");
                                 link.title = "open this profile in a new tab";
                                 let url = current_url.replace(
@@ -60,11 +66,12 @@
                                 link.href = url;
                                 link.target = "_blank";
                                 link.style.textDecoration = "none";
-                                link.appendChild(open_profile);
+                                link.appendChild(button);
                                 br = document.createElement("br");
                                 div.lastChild.append(br);
                                 div.lastChild.append(br.cloneNode(true));
                                 div.lastChild.append(link);
+                                open_profiles.push(link);
 
                                 /*
                                 let img = document.createElement("img");
