@@ -16,27 +16,45 @@
 
 (function () {
     "use strict";
-    const faceit_icon =
-        "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://faceit.com&size=32";
+
     let elements;
     let old_elements;
     let old_url;
     let open_profiles = [];
-    let br;
-    window.setInterval(() => {
-        const current_url = window.location.href;
-        if (current_url != old_url) {
-            old_url = current_url;
-            open_profiles.forEach((open_profile) => {
-                let div = open_profile.parentNode;
-                if (div) {
-                    div.removeChild(div.lastChild);
-                    div.removeChild(div.lastChild);
-                    div.removeChild(div.lastChild);
-                }
-            });
-            open_profiles = [];
+
+    // Select the node that will be observed for mutations
+    const targetNode = document.body;
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: false, childList: true, subtree: true };
+
+    // Callback function to execute when mutations are observed
+    const callback = (mutationList, observer) => {
+        /*
+        for (const mutation of mutationList) {
+            if (mutation.type === "childList") {
+                console.log("A child node has been added or removed.");
+            } else if (mutation.type === "attributes") {
+                console.log(
+                    `The ${mutation.attributeName} attribute was modified.`
+                );
+            }
         }
+        */
+        console.log("observer");
+        const current_url = window.location.href;
+
+        old_url = current_url;
+        open_profiles.forEach((open_profile) => {
+            let div = open_profile.parentNode;
+            if (div) {
+                div.removeChild(div.lastChild);
+                div.removeChild(div.lastChild);
+                div.removeChild(div.lastChild);
+            }
+        });
+        open_profiles = [];
+
         if (current_url.includes("players-modal")) {
             if (
                 (old_url.includes("/players/") && open_profiles.length < 2) ||
@@ -57,6 +75,7 @@
                                 let button = e.cloneNode(true);
                                 button.removeChild(button.firstChild);
                                 button.lastChild.data = "OPEN IN NEW TAB";
+
                                 let link = document.createElement("a");
                                 link.title = "open this profile in a new tab";
                                 let url = current_url.replace(
@@ -67,30 +86,15 @@
                                 link.target = "_blank";
                                 link.style.textDecoration = "none";
                                 link.appendChild(button);
-                                br = document.createElement("br");
-                                div.lastChild.append(br);
-                                div.lastChild.append(br.cloneNode(true));
+
+                                div.lastChild.append(
+                                    document.createElement("br")
+                                );
+                                div.lastChild.append(
+                                    document.createElement("br")
+                                );
                                 div.lastChild.append(link);
                                 open_profiles.push(link);
-
-                                /*
-                                let img = document.createElement("img");
-                                img.src = faceit_icon;
-                                img.style.marginTop = "15px";
-                                open_profile = document.createElement("a");
-                                open_profile.appendChild(img);
-                                open_profile.title =
-                                    "open this profile in a new tab";
-                                let url = current_url.replace(
-                                    "players-modal",
-                                    "players"
-                                );
-                                open_profile.href = url;
-                                open_profile.target = "_blank";
-                                open_profile.style.marginTop = "15px";
-
-                                e.parentNode.parentNode.append(open_profile);
-                                */
                             }
                         });
                     }
@@ -107,5 +111,11 @@
                 });
             }
         }
-    }, 250);
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
 })();
