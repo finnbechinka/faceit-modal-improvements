@@ -5,7 +5,7 @@ A small script/extension that aims to eliminate annoyances with the profile moda
 - Click on a player card in a match room
     - Middle-click on the profile link to open the normal (non-modal) profile in another tab
     - Click on the profile link, to open the modal on top of the match room
-- - On modal profiles, click on the new "OPEN IN NEW TAB" button under the share button to open the non-modal profile in a new tab 
+- On modal profiles, click on the new "OPEN IN NEW TAB" button under the share button to open the non-modal profile in a new tab 
 ### How to install:
 #### <b>Install the [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/remove-faceit-modal/)</b>
 #### Or install the userscript by following the steps below
