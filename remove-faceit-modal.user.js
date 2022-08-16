@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         remove faceit modal
 // @namespace    https://www.faceit.com/
-// @version      1.0
+// @version      1.2.0
 // @description  replace modal profile link with normal profile link
 // @author       shaker
 // @match        *://www.faceit.com/*
@@ -16,62 +16,96 @@
 
 (function () {
     "use strict";
-    const faceit_icon =
-        "https://t1.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=http://faceit.com&size=32";
-    let elements;
-    let old_elements;
-    let open_profile;
+
     let old_url;
-    window.setInterval(() => {
+    let my_elements = [];
+
+    function remove_my_elements() {
+        my_elements.forEach((open_profile) => {
+            let parent = open_profile.parentNode;
+            if (parent) {
+                parent.removeChild(parent.lastChild);
+                parent.removeChild(parent.lastChild);
+                parent.removeChild(parent.lastChild);
+            }
+        });
+        my_elements = [];
+    }
+
+    function add_open_tab_button(current_url) {
+        if (my_elements.length != 0) {
+            remove_my_elements();
+        }
+        // find the shadow root(s) (very cringe)
+        const shadows = Array.from(document.querySelectorAll("*"))
+            .map((el) => el.shadowRoot)
+            .filter(Boolean);
+        shadows.forEach((s) => {
+            let elements = s.querySelectorAll("button");
+            elements.forEach((e) => {
+                if (e.lastChild.data == "Share") {
+                    const div = e.parentNode.parentNode;
+
+                    let button = e.cloneNode(true);
+                    button.removeChild(button.firstChild);
+                    button.lastChild.data = "OPEN IN NEW TAB";
+
+                    let link = document.createElement("a");
+                    link.title = "open this profile in a new tab";
+                    let url = current_url.replace(
+                        "/players-modal/",
+                        "/players/"
+                    );
+                    link.href = url;
+                    link.target = "_blank";
+                    link.style.textDecoration = "none";
+                    link.appendChild(button);
+
+                    div.lastChild.append(document.createElement("br"));
+                    div.lastChild.append(document.createElement("br"));
+                    div.lastChild.append(link);
+                    my_elements.push(link);
+                }
+            });
+        });
+    }
+
+    function change_profile_link() {
+        const elements = document.querySelectorAll("[href*='/players-modal/']");
+        elements.forEach((element) => {
+            const link = element.getAttribute("href");
+            const new_link = link.replace("/players-modal/", "/players/");
+            element.setAttribute("href", new_link);
+        });
+    }
+
+    // Select the node that will be observed for mutations
+    const targetNode = document.body;
+
+    // Options for the observer (which mutations to observe)
+    const config = { attributes: false, childList: true, subtree: true };
+
+    // Callback function to execute when mutations are observed
+    const callback = (mutationList, observer) => {
         const current_url = window.location.href;
+
+        if (current_url.includes("/players-modal/")) {
+            add_open_tab_button(current_url);
+        }
+
+        if (current_url.includes("/room/")) {
+            change_profile_link();
+        }
+
         if (current_url != old_url) {
             old_url = current_url;
-            open_profile.parentNode.removeChild(open_profile);
-            open_profile = null;
+            remove_my_elements();
         }
-        if (current_url.includes("players-modal")) {
-            if (!open_profile) {
-                // find the shadow root(s) (very cringe)
-                const shadows = Array.from(document.querySelectorAll("*"))
-                    .map((el) => el.shadowRoot)
-                    .filter(Boolean);
-                shadows.forEach((s) => {
-                    elements = s.querySelectorAll("button");
-                    if (elements != old_elements) {
-                        old_elements = elements;
-                        elements.forEach((e) => {
-                            if (e.lastChild.data == "Share") {
-                                let img = document.createElement("img");
-                                img.src = faceit_icon;
-                                img.style.marginTop = "15px";
-                                open_profile = document.createElement("a");
-                                open_profile.appendChild(img);
-                                open_profile.title =
-                                    "open this profile in a new tab";
-                                let url = current_url.replace(
-                                    "players-modal",
-                                    "players"
-                                );
-                                open_profile.href = url;
-                                open_profile.target = "_blank";
-                                open_profile.style.marginTop = "15px";
+    };
 
-                                e.parentNode.parentNode.append(open_profile);
-                            }
-                        });
-                    }
-                });
-            }
-        } else {
-            elements = document.querySelectorAll("[href*='/players-modal/']");
-            if (elements !== old_elements) {
-                old_elements = elements;
-                elements.forEach((element) => {
-                    const link = element.getAttribute("href");
-                    const new_link = link.replace("players-modal", "players");
-                    element.setAttribute("href", new_link);
-                });
-            }
-        }
-    }, 250);
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
 })();
