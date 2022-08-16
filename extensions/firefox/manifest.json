@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Remove FACEIT modal",
-    "version": "1.2.2",
+    "version": "1.2.0",
     "homepage_url": "https://github.com/shakerrrr/remove-faceit-modal",
 
     "description": "A small extension that aims to eliminate annoyances with the profile modals on FACEIT.",
