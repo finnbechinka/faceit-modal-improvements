@@ -1,18 +1,15 @@
 // ==UserScript==
-// @name         remove faceit modal
+// @name         FACEIT modal improvements
 // @namespace    https://www.faceit.com/
 // @version      1.2.0
-// @description  replace modal profile link with normal profile link
+// @description  A small extension that aims to eliminate annoyances with the profile modals on FACEIT.
 // @author       shaker
 // @match        *://www.faceit.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=faceit.com
 // @grant        none
 // @run-at       document-end
-// @homepageURL  https://github.com/shakerrrr/remove-faceit-modal
+// @homepageURL  https://github.com/shakerrrr/faceit-modal-improvements
 // ==/UserScript==
-
-// profile link class: sc-hFIzcO eaWQvj
-// modal url: https://www.faceit.com/en/players-modal/[username]
 
 (function () {
     "use strict";
