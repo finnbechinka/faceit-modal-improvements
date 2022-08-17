@@ -1,4 +1,4 @@
-# remove-faceit-modal
+# FACEIT modal improvements
 A small script/extension that aims to eliminate annoyances with the profile modals on FACEIT.
 
 ### Usage guide:
@@ -14,4 +14,4 @@ A small script/extension that aims to eliminate annoyances with the profile moda
 3. Click "Install" or "Confirm installation" or "OK"
 4. You're done!  
 
-[Install script](https://github.com/shakerrrr/remove-faceit-modal/raw/master/remove-faceit-modal.user.js)
+[Install script](https://github.com/shakerrrr/faceit-modal-improvements/raw/master/faceit-modal-improvements.user.js)
