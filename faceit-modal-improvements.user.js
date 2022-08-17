@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FACEIT modal improvements
 // @namespace    https://www.faceit.com/
-// @version      1.2.0
+// @version      1.2.1
 // @description  A small extension that aims to eliminate annoyances with the profile modals on FACEIT.
 // @author       shaker
 // @match        *://www.faceit.com/*

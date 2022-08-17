@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "FACEIT modal improvements",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "homepage_url": "https://github.com/shakerrrr/faceit-modal-improvements",
 
     "description": "A small extension that aims to eliminate annoyances with the profile modals on FACEIT.",
