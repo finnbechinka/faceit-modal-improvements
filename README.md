@@ -7,7 +7,7 @@ A small script/extension that aims to eliminate annoyances with the profile moda
     - Click on the profile link, to open the modal on top of the match room
 - On modal profiles click on the new "OPEN IN NEW TAB" button under the share button to open the the non-modal profile in a new tab 
 ### How to install:
-#### <b>Install the [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/remove-faceit-modal/)</b>
+#### <b>Install the [Firefox Extension](https://addons.mozilla.org/en-US/firefox/addon/faceit-modal-improvements/)</b>
 #### Or install the userscript by following the steps below
 1. Install Tampermonkey, Violentmonkey or FireMonkey
 2. Click the install link below
