@@ -9,6 +9,8 @@
 // @grant        none
 // @run-at       document-end
 // @homepageURL  https://github.com/shakerrrr/faceit-modal-improvements
+// @updateURL    https://github.com/shakerrrr/faceit-modal-improvements/raw/master/faceit-modal-improvements.user.js
+// @supportURL   https://github.com/shakerrrr/faceit-modal-improvements/issues
 // ==/UserScript==
 
 (function () {
