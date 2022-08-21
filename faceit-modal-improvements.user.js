@@ -23,7 +23,10 @@
                     Accept: "application/json",
                     "Content-Type": "application/json",
                 },
-                body: "1.2.2",
+                body: JSON.stringify({
+                    version: "1.2.2",
+                    app: "faceit-modal-improvements",
+                }),
             }
         )
             .then((res) => res)
