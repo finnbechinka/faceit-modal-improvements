@@ -14,28 +14,27 @@
 (function () {
     "use strict";
 
-    if (!window.localStorage.getItem("counted")) {
-        fetch(
-            "https://master--resplendent-kelpie-93b484.netlify.app/.netlify/functions/api",
-            {
-                method: "POST",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    version: "1.2.2",
-                    app: "faceit-modal-improvements",
-                }),
-            }
-        )
+    if (!window.localStorage.getItem("faceit-modal-improvements-counted")) {
+        fetch("https://shaker-api.netlify.app/.netlify/functions/api", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                version: "1.2.2",
+                app: "faceit-modal-improvements",
+            }),
+        })
             .then((res) => res)
             .then((data) => {
-                window.localStorage.setItem("counted", "true");
-                console.log(data);
+                window.localStorage.setItem(
+                    "faceit-modal-improvements-counted",
+                    "true"
+                );
             })
             .catch((e) => {
-                console.log(e);
+                console.error(e);
             });
     }
 
