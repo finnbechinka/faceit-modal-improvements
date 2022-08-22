@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FACEIT modal improvements
 // @namespace    https://www.faceit.com/
-// @version      1.2.1
+// @version      1.2.2
 // @description  A small extension that aims to eliminate annoyances with the profile modals on FACEIT.
 // @author       shaker
 // @match        *://www.faceit.com/*
@@ -9,13 +9,34 @@
 // @grant        none
 // @run-at       document-end
 // @homepageURL  https://github.com/shakerrrr/faceit-modal-improvements
-// @updateURL    https://github.com/shakerrrr/faceit-modal-improvements/raw/master/faceit-modal-improvements.user.js
-// @downloadURL  https://github.com/shakerrrr/faceit-modal-improvements/raw/master/faceit-modal-improvements.user.js
-// @supportURL   https://github.com/shakerrrr/faceit-modal-improvements/issues
 // ==/UserScript==
 
 (function () {
     "use strict";
+
+    if (!window.localStorage.getItem("faceit-modal-improvements-counted")) {
+        fetch("https://shaker-api.netlify.app/.netlify/functions/api", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                version: "1.2.2",
+                app: "faceit-modal-improvements",
+            }),
+        })
+            .then((res) => res)
+            .then((data) => {
+                window.localStorage.setItem(
+                    "faceit-modal-improvements-counted",
+                    "true"
+                );
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    }
 
     let old_url;
     let my_elements = [];
