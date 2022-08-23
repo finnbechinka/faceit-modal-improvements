@@ -1,7 +1,7 @@
-// ==UserScript==
+// ==UserScript==1.2.3
 // @name         FACEIT modal improvements
 // @namespace    https://www.faceit.com/
-// @version      1.2.2
+// @version      1.2.3
 // @description  A small extension that aims to eliminate annoyances with the profile modals on FACEIT.
 // @author       shaker
 // @match        *://www.faceit.com/*
@@ -22,16 +22,17 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                version: "1.2.2",
+                version: "1.2.3",
                 app: "faceit-modal-improvements",
             }),
         })
-            .then((res) => res)
-            .then((data) => {
-                window.localStorage.setItem(
-                    "faceit-modal-improvements-counted",
-                    "true"
-                );
+            .then((res) => {
+                if (res.ok) {
+                    window.localStorage.setItem(
+                        "faceit-modal-improvements-counted",
+                        "true"
+                    );
+                }
             })
             .catch((e) => {
                 console.error(e);
