@@ -28,10 +28,7 @@
         })
             .then((res) => res)
             .then((data) => {
-                window.localStorage.setItem(
-                    "faceit-modal-improvements-counted",
-                    "true"
-                );
+                window.localStorage.setItem("faceit-modal-improvements-counted", "true");
             })
             .catch((e) => {
                 console.error(e);
@@ -73,10 +70,7 @@
 
                     let link = document.createElement("a");
                     link.title = "open this profile in a new tab";
-                    let url = current_url.replace(
-                        "/players-modal/",
-                        "/players/"
-                    );
+                    let url = current_url.replace("/players-modal/", "/players/");
                     link.href = url;
                     link.target = "_blank";
                     link.style.textDecoration = "none";
