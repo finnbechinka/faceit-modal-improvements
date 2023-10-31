@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FACEIT modal improvements
 // @namespace    https://www.faceit.com/
-// @version      1.2.2
+// @version      1.2.3
 // @description  A small extension that aims to eliminate annoyances with the profile modals on FACEIT.
 // @author       shaker
 // @match        *://www.faceit.com/*
@@ -22,7 +22,7 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                version: "1.2.2",
+                version: "1.2.3",
                 app: "faceit-modal-improvements",
             }),
         })
