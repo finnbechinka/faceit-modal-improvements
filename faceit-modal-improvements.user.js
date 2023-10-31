@@ -90,15 +90,13 @@
         });
     }
 
-    // Select the node that will be observed for mutations
     const targetNode = document.body;
+    const config = { attributes: true, childList: true, subtree: true };
+    let observer = new MutationObserver(callback);
+    observer.observe(targetNode, config);
+    let timer = setTimeout(update, 2000);
 
-    // Options for the observer (which mutations to observe)
-    const config = { attributes: false, childList: true, subtree: true };
-
-    let observer;
-
-    const update = () => {
+    function update() {
         observer.disconnect();
         const current_url = window.location.href;
 
@@ -111,32 +109,29 @@
             add_open_tab_button(current_url);
         }
 
+        observer.observe(targetNode, config);
+    }
+
+    function callback(_, observer) {
+        observer.disconnect();
+
+        clearTimeout(timer);
+        timer = setTimeout(update, 2000);
+
+        const current_url = window.location.href;
         if (current_url.includes("/room/")) {
             change_profile_link();
         }
 
         observer.observe(targetNode, config);
+    }
+
+    window.onload = () => {
+        // fallback timeout
+        setTimeout(() => {
+            if (!my_elements) {
+                update();
+            }
+        }, 10000);
     };
-
-    let timer = setTimeout(update, 2000);
-
-    // Callback function to execute when mutations are observed
-    const callback = (mutationList, observer) => {
-        observer.disconnect();
-        clearTimeout(timer);
-        timer = setTimeout(update, 2000);
-        change_profile_link();
-        observer.observe(targetNode, config);
-    };
-
-    // Create an observer instance linked to the callback function
-    observer = new MutationObserver(callback);
-
-    observer.observe(targetNode, config);
-
-    setTimeout(() => {
-        if (!my_elements) {
-            update();
-        }
-    }, 10000);
 })();
