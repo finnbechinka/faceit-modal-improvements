@@ -88,8 +88,11 @@
 
     // Callback function to execute when mutations are observed
     const callback = (mutationList, observer) => {
+        observer.disconnect();
         clearTimeout(timer);
         timer = setTimeout(update, 2000);
+        change_profile_link();
+        observer.observe(targetNode, config);
     };
 
     // Create an observer instance linked to the callback function
